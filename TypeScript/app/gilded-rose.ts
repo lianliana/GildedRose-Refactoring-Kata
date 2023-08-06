@@ -22,6 +22,10 @@ function isSulfuras(item: Item) {
   return item.name === 'Sulfuras, Hand of Ragnaros'
 }
 
+function isConjured(item: Item){
+  return item.name === 'Conjured'
+}
+
 function increaseQuality(item: Item) {
   item.quality += 1
 }
@@ -68,6 +72,17 @@ function updateSulfurasQuality(item: Item) {
 
 }
 
+function updateConjured(item: Item){
+  if (item.quality > 0) {
+    decreaseQuality(item)
+    decreaseQuality(item)
+  }
+  decreaseSellIn(item)
+  if (item.sellIn < 0) {
+    decreaseQuality(item)
+  }
+}
+
 function updateNormalQuality(item: Item) {
   if (item.quality > 0) {
     decreaseQuality(item)
@@ -93,6 +108,8 @@ export class GildedRose {
         updateAgedBrieQuality(item)
       } else if (isSulfuras(item)) {
         updateSulfurasQuality(item)
+      }else if(isConjured(item)){
+        updateConjured(item)
       } else {
         updateNormalQuality(item)
       }

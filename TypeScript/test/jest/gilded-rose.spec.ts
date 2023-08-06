@@ -64,3 +64,11 @@ describe('Sulfuras, Hand of Ragnaros', () => {
   });
 });
 
+describe('Conjured', () => {
+  it('"Conjured" items degrade in Quality twice as fast as normal items', () => {
+    const gildedRose = new GildedRose([new Item('Conjured', 2, 20)]);
+    const items = gildedRose.updateQuality();
+    expect(items[0].quality).toBe(18);
+  });
+});
+
